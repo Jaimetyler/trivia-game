@@ -87,9 +87,17 @@ function startGame () {
     timer ();
     questionContent ();
 
+    //if (user guess is = to correct answer){
+        //wins++
+        //show win screen
+    //else {
+        //losses++
+        //show loser screen
+
+    }
+    
     
 
-}
 
 
 //make a timer function that will be called each time a new question loads.
@@ -99,7 +107,7 @@ function timer () {
 		function countDown() {
 			if (time < 1) {
 				clearInterval(clock);
-				outOfTime();
+				
 			}
 			if (time > 0) {
 				time--;
@@ -107,6 +115,7 @@ function timer () {
 			$("#game-timer").html("You Have " + time + " seconds remaining");
 }
 }
+
 
 
 // make a function that will load a new question with choices into the html. 
@@ -121,8 +130,6 @@ function questionContent() {
  }
 
 
-    
-
 function nextQuestion (){
     //needs to start new timer and load new questions/choices
     
@@ -130,8 +137,9 @@ function nextQuestion (){
         time = 15;
         $("#game-timer").html("You have " + time + " seconds left!");
         questionContent();
+        clearInterval(clock);
         timer();
-        outOfTime();
+        
    
 }
 
@@ -139,7 +147,7 @@ function nextQuestion (){
 // make a function that will display "That's Right! with an image and also increase the correct answers count by 1.
 function rightAnswer () {
     //displays message 
-    $("#stage").text("That is correct!")   
+    $(".row").html("That is correct!")   
     //correctAnswers++
     correctAnswers++
     //displays image
@@ -159,6 +167,9 @@ function wrongAnswer () {
 
 //make a function that will display a message and trigger the next question when the time runs out.
  function outOfTime () {
+    $(".row").html("You ran out of Time!") 
+    incorrectAnswers++
+
    
     
 
