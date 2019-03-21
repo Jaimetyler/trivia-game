@@ -1,0 +1,32 @@
+.jumbotron {
+    text-align: center;
+}
+
+.card {
+    height: 600px;
+}
+
+.card-header {
+    text-align: center;
+    font-weight: bold;
+    font-size: 22px;
+}
+
+.row {
+    font-size: 28px;
+    margin-top: 15px;
+}
+
+.row, #start {
+    text-align: center;
+    margin-top: 15px;
+}
+
+#question {
+    font-weight: bold;
+}
+
+.answer-list:hover  {
+    background-color : rgb(90, 47, 170);
+
+}
