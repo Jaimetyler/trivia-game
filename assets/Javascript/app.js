@@ -70,13 +70,18 @@ var questions = [{question: "In the scorebook, position 1 is the pitcher. This b
 $("#start").click(function () {
     console.log("button working")
     startGame()
-    nextQuestion ()
         userGuess = this
     if (userGuess === questions[questionNumber].correct) {
         rightAnswer ()
+        nextQuestion()
+    } else if (userGuess !== questions[questionNumber].correct) {
+        wrongAnswer()
+        nextQuestion()
     }
+})
+    
 
-});
+
 
  
 //make a function for the starting time.
@@ -107,7 +112,7 @@ function timer () {
 		function countDown() {
 			if (time < 1) {
 				clearInterval(clock);
-				
+			//out of time call?	
 			}
 			if (time > 0) {
 				time--;
@@ -127,11 +132,15 @@ function questionContent() {
     $("#choice3").text(questions[questionNumber].choices[2]);
     $("#choice4").text(questions[questionNumber].choices[3]);
     console.log(questions)
+
+    //i need a for loop here to run through each question
  }
 
 
 function nextQuestion (){
     //needs to start new timer and load new questions/choices
+
+    
     
     if (questionNumber < questions.length) {
         time = 15;
