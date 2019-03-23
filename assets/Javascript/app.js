@@ -65,22 +65,6 @@ var questions = [{question: "In the scorebook, position 1 is the pitcher. This b
             }
         ];
 
-//make a button click event that will trigger a start game function.
-
-$("#start").click(function () {
-    console.log("button working")
-    startGame()
-        userGuess = this
-    if (userGuess === questions[questionNumber].correct) {
-        rightAnswer ()
-        nextQuestion()
-    } else if (userGuess !== questions[questionNumber].correct) {
-        wrongAnswer()
-        nextQuestion()
-    }
-})
-    
-
 
 
  
@@ -88,39 +72,9 @@ $("#start").click(function () {
     //starting the game is going to load an object into the correct #'s of row2.
     //starting the game will also start the time
 
-function startGame () {
-    timer ();
-    questionContent ();
 
-    //if (user guess is = to correct answer){
-        //wins++
-        //show win screen
-    //else {
-        //losses++
-        //show loser screen
-
-    }
     
-    
-
-
-
 //make a timer function that will be called each time a new question loads.
-
-function timer () {
-    clock = setInterval(countDown, 1000);
-		function countDown() {
-			if (time < 1) {
-				clearInterval(clock);
-			//out of time call?	
-			}
-			if (time > 0) {
-				time--;
-			}
-			$("#game-timer").html("You Have " + time + " seconds remaining");
-}
-}
-
 
 
 // make a function that will load a new question with choices into the html. 
@@ -136,61 +90,130 @@ function questionContent() {
     //i need a for loop here to run through each question
  }
 
-
-function nextQuestion (){
-    //needs to start new timer and load new questions/choices
-
-    
-    
-    if (questionNumber < questions.length) {
-        time = 15;
-        $("#game-timer").html("You have " + time + " seconds left!");
-        questionContent();
-        clearInterval(clock);
-        timer();
-        
-   
-}
-
-
 // make a function that will display "That's Right! with an image and also increase the correct answers count by 1.
 function rightAnswer () {
     //displays message 
-    $(".row").html("That is correct!")   
-    //correctAnswers++
-    correctAnswers++
-    //displays image
-    $("#question").html(questions[questionNumber].image);
+    $(".card").html("<h2>You got it right!</h2>");
+		correctAnswers++;
+		var correctGuess = questions[questionNumber].correct;
+		$(".card").append("The answer was " + correctGuess  + questions[questionNumber].image);
+			 
+		setTimeout(nextQuestion, 5000);
+        questionNumber++;
+        console.log(questions);
+        console.log("right answer is working")
   
 }
 
 
-
-
 //make a function that will display "Incorrect! the correct answer is...insert the correct answeer" with a wrong answer image and also increase the incorrect answers count by 1. 
 function wrongAnswer () {
-    //displays message 
-    //displays image
-    //incorrectAnswers++
-}
+    //displays a wrong message ,adds to incorrectAnswers,shows loser image
+    $(".card").html("<h2>Nah, That's not it!</h2>");
+		incorrectAnswers++;
+		var correctGuess = questions[questionNumber].correct;
+		$(".card").append("The answer was " + correctGuess  + questions[questionNumber].image);
+			 
+		setTimeout(nextQuestion, 5000);
+        questionNumber++;
+        console.log("wrong answer is working")
+ }
+  
 
 //make a function that will display a message and trigger the next question when the time runs out.
  function outOfTime () {
-    $(".row").html("You ran out of Time!") 
-    incorrectAnswers++
 
-   
-    
+    $(".card").html("<h2>You ran out of time!</h2>");
+		incorrectAnswers++;
+		var correctGuess = questions[questionNumber].correct;
+		$(".card").append("The answer was " + correctGuess  + questions[questionNumber].image);
+			 
+		setTimeout(nextQuestion(), 5000);
+        questionNumber++;
+        console.log("outofTime is working")
 
  }
+ 
 
+ function results () {
+     if (correctAnswers === questions.length) {
+         var resultMessage = "Whoa! You really know your stuff!";
+    } else if (correctAnswers > incorrectAnswers) {
+         var resultMessage = "Not bad, Not bad. Better than a .500 Average";
+     } else {
+         var resultMessage = "Hmmm, thats pretty bad..."
+     }
+     //now need to make these show up on the page
+     $(".card").html("<h2>" + resultMessage + "</h2>" + "<h2>" + "You got: " + correctAnswers + " right" + "</h2>" + "<h2>" + "You got: " + incorrectAnswers + " wrong" + "</h2>");
+     $(".row").append("<h2 id='startOver'> Start Over?</h2>");
+     reset();
+     ("#startover").click(nextQuestion);
+     console.log("results page is working")
+}
 
+     
 //make a function that will  dispay the amount of correct and incorrect answers and then wait a few seconds to reset the game. 
     //the reset function should be set on a delay after the dispaying of the correct/incorrect answers. 
+ function timer () {
+        clock = setInterval(countDown, 1000);
+        function countDown() {
+        if (time < 1) {
+        clearInterval(clock);
+        outOfTime()	
+    }
+        if (time > 0) {
+        time--;
+    }
+        $("#game-timer").html("You Have " + time + " seconds remaining");
+    }
+}
     
-function gameOver () {
 
+function nextQuestion (){
+    //needs to start new timer and load new questions/choices
+    if (questionNumber < questions.length) {
+        time = 15;
+        $("#game-timer").html("You have " + time + " seconds left!");
+        questionContent();
+        timer();
+        
+        console.log("nextQuestion working");    
+    }else {
+        results();
+        console.log(questionNumber + "shits working,yo");
+    }
+}  
+    
+function reset () {
+    questionNumber = 0;
+    correctAnswers = 0;
+    incorrectAnswers = 0;
+}
+
+function startGame () {
+    $("#game-timer").html("You have " + time + " seconds left!");
+    $("#start").hide();
+
+    questionContent();
+    timer();
+    
 }
 
 
-}
+$("#start").click(startGame());
+    
+       
+$("#.row").on("click", ".answer-list", (function() {
+    // alert("clicked!");
+    
+    var userGuess = $(this).text();
+    if (userGuess === questions[questionNumber].correctAnswer) {
+        clearInterval(clock);
+        rightAnswer();
+    }else {
+        clearInterval(clock);
+        wrongAnswer();
+
+
+
+ }}));
