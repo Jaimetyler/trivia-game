@@ -1,219 +1,190 @@
-console.log("I'm working !")
-
-//make a variable that holds start time of question timer
-var time = 15
-
-//make a variable to keep track of what number question user is on
-var questionNumber = 0
-
-//make a variable to keep track of the number of correct answers to call at the end of the game
-var correctAnswers = 0
-
-//make a variable to keep track of the number of incorrect answers
-var incorrectAnswers = 0
-
-//create objects that contain the question, choices and correct answer/image for each question.(the image may come from somewhere else.need to look that up).
-var questions = [{question: "In the scorebook, position 1 is the pitcher. This big right hander won more games in Milwaukee than any Brave other than Hall of Famer Warren Spahn. He was the MVP of the 1957 World Series and claimed three of the Champions' four wins. Who was he?",
-                  choices: ["Lew Burdette","Bobby Mercer","Larry Jones","Russ Mills"],
-                correct: "Lew Burdette",
-                image: "<img src='assets/images/celebrate.jpg'>"
-            },
-            {question: "What year did the Braves win the World Series?",
-                  choices: ["1995","2000","1991","1989"],
-                correct: "1995",
-                image: "<img src='assets/images/celebrate.jpg'>"
-            },
-            {question: "What year did the Braves win the World Series?",
-                  choices: ["1995","2000","1991","1989"],
-                correct: "1995",
-                image: "<img src='assets/images/celebrate.jpg'>"
-            },
-            {question: "What year did the Braves win the World Series?",
-                  choices: ["1995","2000","1991","1989"],
-                correct: "1995",
-                image: "<img src='assets/images/celebrate.jpg'>"
-            },
-            {question: "What year did the Braves win the World Series?",
-                  choices: ["1995","2000","1991","1989"],
-                correct: "1995",
-                image: "<img src='assets/images/celebrate.jpg'>"
-            },
-            {question: "What year did the Braves win the World Series?",
-                  choices: ["1995","2000","1991","1989"],
-                correct: "1995",
-                image: "<img src='assets/images/celebrate.jpg'>"
-            },
-            {question: "What year did the Braves win the World Series?",
-                  choices: ["1995","2000","1991","1989"],
-                correct: "1995",
-                image: "<img src='assets/images/celebrate.jpg'>"
-            },
-            {question: "What year did the Braves win the World Series?",
-                  choices: ["1995","2000","1991","1989"],
-                correct: "1995",
-                image: "<img src='assets/images/celebrate.jpg'>"
-            },
-            {question: "What year did the Braves win the World Series?",
-                  choices: ["1995","2000","1991","1989"],
-                correct: "1995",
-                image: "<img src='assets/images/celebrate.jpg'>"
-            },
-            {question: "What year did the Braves win the World Series?",
-                  choices: ["1995","2000","1991","1989"],
-                correct: "1995",
-                image: "<img src='assets/images/celebrate.jpg'>"
-            }
-        ];
+$(document ).ready(function(){
 
 
 
- 
-//make a function for the starting time.
-    //starting the game is going to load an object into the correct #'s of row2.
-    //starting the game will also start the time
-
-
+    console.log("I'm working !")
     
-//make a timer function that will be called each time a new question loads.
+    //make a variable that holds start time of question timer
+    var time = 25
+    
+    var questionNumber = 0
+    //make a variable to keep track of the number of correct answers to call at the end of the game
+    var correctAnswers = 0
+    
+    //make a variable to keep track of the number of incorrect answers
+    var incorrectAnswers = 0
+    
+    var unansweredQuestions = 0
+    
+    //create objects that contain the question, choices and correct answer/image for each question.(the image may come from somewhere else.need to look that up).
+    var questions = [{question: "Which player has been an Atlanta Brave third baseman?",
+                      choices: ["Larry Jones","Bobby Mercer","Lew Burnett","Russ Mills"],
+                    correct: "Larry Jones"
+                    
+                },
+                {question: "What year did the Braves win the World Series?",
+                      choices: ["1995","2000","1991","1989"],
+                    correct: "1995"
+                    
+                },
+                {question: "Which city has the Braves never called home?",
+                      choices: ["Chicago","Atlanta","Milwaukee","Boston"],
+                    correct: "Chicago"
+                    
+                },
+                {question: "What team did Dale Murphy go to after he played for the Atlanta Braves?",
+                      choices: ["Philadelphia Phillies","Chicago Cubs","Cincinatti Reds","New York Mets"],
+                    correct: "Philadelphia Phillies"
+                    
+                },
+                {question: "Which one of these teams has Bobby Cox managed besides the Braves?",
+                      choices: ["Blue jays","Mets","Red Sox","White Sox"],
+                    correct: "Blue jays"
+                    
+                },
+               
+            ];
+    
+var images = [{
+    winImage: "<img src='assets/images/celebrate.jpg'>",
+    lossImage: "<img src='assets/images/braves-lose.jpg'>"
+}]
 
-
-// make a function that will load a new question with choices into the html. 
+    //just coulnd't figure out the best way to do this. tried to loop through, tried random.math formulas but ran into problems with the same questions coming up twice. 
 
 function questionContent() {
-    $("#question").text(questions[questionNumber].question);
-    $("#choice1").text(questions[questionNumber].choices[0]);
-    $("#choice2").text(questions[questionNumber].choices[1]);
-    $("#choice3").text(questions[questionNumber].choices[2]);
-    $("#choice4").text(questions[questionNumber].choices[3]);
-    console.log(questions)
 
-    //i need a for loop here to run through each question
- }
+        // for (i = 0; i < questions.length; i++) 
+        $("#questions").append("<p>" + 
+        questions[0].question + 
+        "<p class='choices'>" + 
+        questions[0].choices[0] + 
+        "<p class='choices'>" + 
+        questions[0].choices[1] + 
+        "<p class='choices'>" + 
+        questions[0].choices[2] + 
+        "</p><p class='choices'>" + 
+        questions[0].choices[3] + 
+        "<p class='choices'>" + 
+        "</p>");
+        console.log(questions[0].choices[3])
+        $("#questions").append("<p>" + 
+        questions[1].question + 
+        "<p class='choices'>" + 
+        questions[1].choices[0] + 
+        "<p class='choices'>" + 
+        questions[1].choices[1] + 
+        "<p class='choices'>" + 
+        questions[1].choices[2] + 
+        "</p><p class='choices'>" + 
+        questions[1].choices[3] + 
+        "<p class='choices'>" + 
+        "</p>");
 
-// make a function that will display "That's Right! with an image and also increase the correct answers count by 1.
-function rightAnswer () {
-    //displays message 
-    $(".card").html("<h2>You got it right!</h2>");
-		correctAnswers++;
-		var correctGuess = questions[questionNumber].correct;
-		$(".card").append("The answer was " + correctGuess  + questions[questionNumber].image);
-			 
-		setTimeout(nextQuestion, 5000);
-        questionNumber++;
-        console.log(questions);
-        console.log("right answer is working")
-  
-}
+        $("#questions").append("<p>" + 
+        questions[2].question + 
+        "<p class='choices'>" + 
+        questions[2].choices[0] + 
+        "<p class='choices'>" + 
+        questions[2].choices[1] + 
+        "<p class='choices'>" + 
+        questions[2].choices[2] + 
+        "</p><p class='choices'>" + 
+        questions[2].choices[3] + 
+        "<p class='choices'>" + 
+        "</p>");
 
+        $("#questions").append("<p>" + 
+        questions[3].question + 
+        "<p class='choices'>" + 
+        questions[3].choices[0] + 
+        "<p class='choices'>" + 
+        questions[3].choices[1] + 
+        "<p class='choices'>" + 
+        questions[3].choices[2] + 
+        "</p><p class='choices'>" + 
+        questions[3].choices[3] + 
+        "<p class='choices'>" + 
+        "</p>");
 
-//make a function that will display "Incorrect! the correct answer is...insert the correct answeer" with a wrong answer image and also increase the incorrect answers count by 1. 
-function wrongAnswer () {
-    //displays a wrong message ,adds to incorrectAnswers,shows loser image
-    $(".card").html("<h2>Nah, That's not it!</h2>");
-		incorrectAnswers++;
-		var correctGuess = questions[questionNumber].correct;
-		$(".card").append("The answer was " + correctGuess  + questions[questionNumber].image);
-			 
-		setTimeout(nextQuestion, 5000);
-        questionNumber++;
-        console.log("wrong answer is working")
- }
-  
-
-//make a function that will display a message and trigger the next question when the time runs out.
- function outOfTime () {
-
-    $(".card").html("<h2>You ran out of time!</h2>");
-		incorrectAnswers++;
-		var correctGuess = questions[questionNumber].correct;
-		$(".card").append("The answer was " + correctGuess  + questions[questionNumber].image);
-			 
-		setTimeout(nextQuestion(), 5000);
-        questionNumber++;
-        console.log("outofTime is working")
-
- }
- 
-
- function results () {
-     if (correctAnswers === questions.length) {
-         var resultMessage = "Whoa! You really know your stuff!";
-    } else if (correctAnswers > incorrectAnswers) {
-         var resultMessage = "Not bad, Not bad. Better than a .500 Average";
-     } else {
-         var resultMessage = "Hmmm, thats pretty bad..."
-     }
-     //now need to make these show up on the page
-     $(".card").html("<h2>" + resultMessage + "</h2>" + "<h2>" + "You got: " + correctAnswers + " right" + "</h2>" + "<h2>" + "You got: " + incorrectAnswers + " wrong" + "</h2>");
-     $(".row").append("<h2 id='startOver'> Start Over?</h2>");
-     reset();
-     ("#startover").click(nextQuestion);
-     console.log("results page is working")
-}
-
+        $("#questions").append("<p>" + 
+        questions[4].question + 
+        "<p class='choices'>" + 
+        questions[4].choices[0] + 
+        "<p class='choices'>" + 
+        questions[4].choices[1] + 
+        "<p class='choices'>" + 
+        questions[4].choices[2] + 
+        "</p><p class='choices'>" + 
+        questions[4].choices[3] + 
+        "<p class='choices'>" + 
+        "</p>");
+        
      
-//make a function that will  dispay the amount of correct and incorrect answers and then wait a few seconds to reset the game. 
-    //the reset function should be set on a delay after the dispaying of the correct/incorrect answers. 
+}
+
  function timer () {
         clock = setInterval(countDown, 1000);
         function countDown() {
         if (time < 1) {
         clearInterval(clock);
-        outOfTime()	
+        outOfTime();	
     }
         if (time > 0) {
         time--;
     }
         $("#game-timer").html("You Have " + time + " seconds remaining");
     }
+    console.log("timer restarted")
 }
     
 
-function nextQuestion (){
-    //needs to start new timer and load new questions/choices
-    if (questionNumber < questions.length) {
-        time = 15;
-        $("#game-timer").html("You have " + time + " seconds left!");
-        questionContent();
-        timer();
-        
-        console.log("nextQuestion working");    
-    }else {
-        results();
-        console.log(questionNumber + "shits working,yo");
-    }
-}  
-    
+function outOfTime () {
+
+    $(".card").html("<h2>Game Over!</h2>" + "<p>" + "Correct Answers: " + correctAnswers + "</p>" + "<p>" + "Incorrect Answers: " + incorrectAnswers + "</p>"+ "<p>" + "Unanswered Questions: " + unansweredQuestions + "</p>");
+	setTimeout(reset(), 5000)
+	$(".row").html(lossImage)
+
+}
+
 function reset () {
-    questionNumber = 0;
+    clearInterval(clock)
+    unansweredQuestions = 0;
     correctAnswers = 0;
     incorrectAnswers = 0;
+
+    startGame()
 }
+
 
 function startGame () {
-    $("#game-timer").html("You have " + time + " seconds left!");
-    $("#start").hide();
-
+    $("#game-timer").html("You Have " + time + " seconds remaining");
+    timer (); 
     questionContent();
-    timer();
     
 }
+
 
 
 $("#start").click(startGame());
+var userGuess = $(".choices").val();
+
+$("#questions").on("click", ".choices", (function() {
     
-       
-$("#.row").on("click", ".answer-list", (function() {
-    // alert("clicked!");
+ //don't know what is up with this...cannot get my correct answer to log as anything other than undefined. its throwing off the entire rest of the gaming process
     
-    var userGuess = $(this).text();
-    if (userGuess === questions[questionNumber].correctAnswer) {
-        clearInterval(clock);
-        rightAnswer();
+    if (userGuess === questions[questionNumber].correct) {
+        correctAnswers++
+        
+    }else if (userGuess !== questions[questionNumber].correct) {
+       incorrectAnswers++
     }else {
-        clearInterval(clock);
-        wrongAnswer();
+        unansweredQuestions++
+    }
+    console.log("incorrect: " + incorrectAnswers)
+    console.log("correct: " + correctAnswers)
+    console.log("correct answer: " + questions.correct)
+    
+}))
 
-
-
- }}));
+})
