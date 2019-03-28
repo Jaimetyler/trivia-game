@@ -1,190 +1,157 @@
-$(document ).ready(function(){
+$("#start-button").on("click", function(){
+    $("#start-button").remove()
+    console.log("start button")
+    game.loadQuestion();
+})
 
-
-
-    console.log("I'm working !")
-    
-    //make a variable that holds start time of question timer
-    var time = 25
-    
-    var questionNumber = 0
-    //make a variable to keep track of the number of correct answers to call at the end of the game
-    var correctAnswers = 0
-    
-    //make a variable to keep track of the number of incorrect answers
-    var incorrectAnswers = 0
-    
-    var unansweredQuestions = 0
-    
-    //create objects that contain the question, choices and correct answer/image for each question.(the image may come from somewhere else.need to look that up).
-    var questions = [{question: "Which player has been an Atlanta Brave third baseman?",
-                      choices: ["Larry Jones","Bobby Mercer","Lew Burnett","Russ Mills"],
-                    correct: "Larry Jones"
-                    
-                },
-                {question: "What year did the Braves win the World Series?",
-                      choices: ["1995","2000","1991","1989"],
-                    correct: "1995"
-                    
-                },
-                {question: "Which city has the Braves never called home?",
-                      choices: ["Chicago","Atlanta","Milwaukee","Boston"],
-                    correct: "Chicago"
-                    
-                },
-                {question: "What team did Dale Murphy go to after he played for the Atlanta Braves?",
-                      choices: ["Philadelphia Phillies","Chicago Cubs","Cincinatti Reds","New York Mets"],
-                    correct: "Philadelphia Phillies"
-                    
-                },
-                {question: "Which one of these teams has Bobby Cox managed besides the Braves?",
-                      choices: ["Blue jays","Mets","Red Sox","White Sox"],
-                    correct: "Blue jays"
-                    
-                },
-               
-            ];
-    
-var images = [{
-    winImage: "<img src='assets/images/celebrate.jpg'>",
-    lossImage: "<img src='assets/images/braves-lose.jpg'>"
-}]
-
-    //just coulnd't figure out the best way to do this. tried to loop through, tried random.math formulas but ran into problems with the same questions coming up twice. 
-
-function questionContent() {
-
-        // for (i = 0; i < questions.length; i++) 
-        $("#questions").append("<p>" + 
-        questions[0].question + 
-        "<p class='choices'>" + 
-        questions[0].choices[0] + 
-        "<p class='choices'>" + 
-        questions[0].choices[1] + 
-        "<p class='choices'>" + 
-        questions[0].choices[2] + 
-        "</p><p class='choices'>" + 
-        questions[0].choices[3] + 
-        "<p class='choices'>" + 
-        "</p>");
-        console.log(questions[0].choices[3])
-        $("#questions").append("<p>" + 
-        questions[1].question + 
-        "<p class='choices'>" + 
-        questions[1].choices[0] + 
-        "<p class='choices'>" + 
-        questions[1].choices[1] + 
-        "<p class='choices'>" + 
-        questions[1].choices[2] + 
-        "</p><p class='choices'>" + 
-        questions[1].choices[3] + 
-        "<p class='choices'>" + 
-        "</p>");
-
-        $("#questions").append("<p>" + 
-        questions[2].question + 
-        "<p class='choices'>" + 
-        questions[2].choices[0] + 
-        "<p class='choices'>" + 
-        questions[2].choices[1] + 
-        "<p class='choices'>" + 
-        questions[2].choices[2] + 
-        "</p><p class='choices'>" + 
-        questions[2].choices[3] + 
-        "<p class='choices'>" + 
-        "</p>");
-
-        $("#questions").append("<p>" + 
-        questions[3].question + 
-        "<p class='choices'>" + 
-        questions[3].choices[0] + 
-        "<p class='choices'>" + 
-        questions[3].choices[1] + 
-        "<p class='choices'>" + 
-        questions[3].choices[2] + 
-        "</p><p class='choices'>" + 
-        questions[3].choices[3] + 
-        "<p class='choices'>" + 
-        "</p>");
-
-        $("#questions").append("<p>" + 
-        questions[4].question + 
-        "<p class='choices'>" + 
-        questions[4].choices[0] + 
-        "<p class='choices'>" + 
-        questions[4].choices[1] + 
-        "<p class='choices'>" + 
-        questions[4].choices[2] + 
-        "</p><p class='choices'>" + 
-        questions[4].choices[3] + 
-        "<p class='choices'>" + 
-        "</p>");
-        
-     
-}
-
- function timer () {
-        clock = setInterval(countDown, 1000);
-        function countDown() {
-        if (time < 1) {
-        clearInterval(clock);
-        outOfTime();	
-    }
-        if (time > 0) {
-        time--;
-    }
-        $("#game-timer").html("You Have " + time + " seconds remaining");
-    }
-    console.log("timer restarted")
-}
-    
-
-function outOfTime () {
-
-    $(".card").html("<h2>Game Over!</h2>" + "<p>" + "Correct Answers: " + correctAnswers + "</p>" + "<p>" + "Incorrect Answers: " + incorrectAnswers + "</p>"+ "<p>" + "Unanswered Questions: " + unansweredQuestions + "</p>");
-	setTimeout(reset(), 5000)
-	$(".row").html(lossImage)
-
-}
-
-function reset () {
-    clearInterval(clock)
-    unansweredQuestions = 0;
-    correctAnswers = 0;
-    incorrectAnswers = 0;
-
-    startGame()
-}
-
-
-function startGame () {
-    $("#game-timer").html("You Have " + time + " seconds remaining");
-    timer (); 
-    questionContent();
-    
-}
-
-
-
-$("#start").click(startGame());
-var userGuess = $(".choices").val();
-
-$("#questions").on("click", ".choices", (function() {
-    
- //don't know what is up with this...cannot get my correct answer to log as anything other than undefined. its throwing off the entire rest of the gaming process
-    
-    if (userGuess === questions[questionNumber].correct) {
-        correctAnswers++
-        
-    }else if (userGuess !== questions[questionNumber].correct) {
-       incorrectAnswers++
-    }else {
-        unansweredQuestions++
-    }
-    console.log("incorrect: " + incorrectAnswers)
-    console.log("correct: " + correctAnswers)
-    console.log("correct answer: " + questions.correct)
-    
-}))
+$(document).on("click",".answer-button", function(e) {
+    game.clicked(e);
 
 })
+
+$(document).on("click", "#reset", function(){
+    game.reset();
+})
+   
+
+var questions = [{question: "Which player has been an Atlanta Brave third baseman?",
+                  choices: ["Lew Burdette","Bobby Mercer","Larry Jones","Russ Mills"],
+                correct: "Larry Jones",
+                image: "<img src='assets/images/celebrate.jpg'>"
+            },
+            {question: "What year did the Braves win the World Series?",
+                  choices: ["1995","2000","1991","1989"],
+                correct: "1995",
+                image: "<img src='assets/images/celebrate.jpg'>"
+            },
+            {question: "Which city has the Braves never called home?",
+                  choices: ["Boston","Atlanta","Milwaukee","Chicago"],
+                correct: "Chicago",
+                image: "<img src='assets/images/celebrate.jpg'>"
+            },
+            {question: "What team did Dale Murphy go to after he played for the Atlanta Braves?",
+                  choices: ["Chicago Cubs","Philadelphia Phillies","Cincinatti Reds","New York Mets"],
+                correct: "Philadelphia Phillies",
+                image: "<img src='assets/images/celebrate.jpg'>"
+            },
+            {question: "Which one of these teams has Bobby Cox managed besides the Braves?",
+                  choices: ["Mets","Blue Jays","Red Sox","White Sox"],
+                correct: "Blue jays",
+                image: "<img src='assets/images/celebrate.jpg'>"
+            },
+           
+        ];
+
+
+
+var game = {
+    questions: questions,
+    currentQuestion: 0,
+    counter: 30,
+    correct:0,
+    incorrect: 0,
+    unAnswered: 0,
+
+    countdown: function(){
+        game.counter--;
+        $("#counter").html(game.counter);
+        if (game.counter===0) {
+            alert("OUT OF TIME!");
+            game.timeUp();
+        }
+        
+
+    },
+    
+    loadQuestion: function(){
+        timer = setInterval(game.countdown( 1000));
+        $("#subwrapper").html("<h2>TIME REMAINING  <span id = 'counter'> 30 </span>Seconds</h2>");
+        $("#subwrapper").append("<h2>" + questions[game.currentQuestion].question + "</h2>");
+        for (i = 0; i < questions[game.currentQuestion].choices.length; i++){
+        $("#subwrapper").append('<button class = "answer-button" id = "button- ' + i + 
+        '"data-name = "' + questions[game.currentQuestion].choices[i] + '">'+questions[game.currentQuestion].choices[i]+'</button>');
+        }
+
+    },
+
+    nextQuestion: function(){
+        game.counter = 30;
+        $("#counter").html(game.counter);
+        game.currentQuestion++
+        game.loadQuestion();
+
+    },
+
+    timeUp: function(){
+        clearInterval(timer);
+        $("#subwrapper").html('<h2> AWW, OUT OF TIME!</h2>');
+        $("#subwrapper").append("<h3>The Correct Answer was : " +  
+        questions[game.currentQuestion].correct + "</h3>")
+
+        if (game.currentQuestion==questions.length-1){
+            setTimeout(game.results(3*1000));
+        }else{
+            setTimeout(game.nextQuestion(3*1000));
+        }
+
+    },
+
+    results: function(){
+        clearInterval(timer);
+        $("#subwrapper").html("<h3>Correct: " +game.correct+"</h3");
+        $("#subwrapper").append("<h3>Correct: " +game.incorrect+"</h3");
+        $("#subwrapper").append("<h3>Correct: " +game.unAnswered+"</h3");
+        $("#subwrapper").append("<button id = 'reset'>RESET</button>");
+    },
+
+    clicked: function(e){
+        clearInterval(timer);
+        if( $(e.target).data("name")==questions[game.currentQuestion].correct){
+            game.answeredCorrectly();
+        }else {
+            game.answeredIncorrectly();
+        }
+        
+    },
+
+    
+
+    answeredCorrectly: function(){
+        console.log("YOU GOT IT");
+        clearInterval(timer);
+        game.correct++;
+        $("#subwrapper").html('<h2> YOU GOT IT !</h2>');
+        if (game.currentQuestion==questions.length-1){
+            setTimeout(game.results, 3*1000);
+        }else{
+            setTimeout(game.nextQuestion,3*1000);
+        }
+     },
+
+    
+
+    answeredIncorrectly: function(){
+        console.log("YOU MISSED IT");
+        clearInterval(timer);
+        game.incorrect++;
+        $("#subwrapper").html('<h2> YOU MISSED IT !</h2>');
+        if (game.currentQuestion==questions.length-1){
+            setTimeout(game.results, 3*1000);
+        }else{
+            setTimeout(game.nextQuestion,3*1000);
+        }
+    },
+
+    reset: function(){
+    questions= questions;
+    currentQuestion= 0;
+    counter= 30;
+    correct= 0;
+    incorrect= 0;
+    unAnswered= 0;
+    game.loadQuestion();
+    
+}
+}
+
+
