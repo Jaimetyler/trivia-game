@@ -43,7 +43,7 @@ var questions = [{question: "Which player has been an Atlanta Brave third basema
         ];
 
 var winImage = "<img src='assets/images/celebrate.jpg'>"
-var lossImage = "<img src='assets/images/celebrate.jpg'>"
+var lossImage = "<img src='assets/images/braves-lose.jpg'>"
 
 
 var game = {
@@ -77,6 +77,7 @@ var game = {
     },
 
     nextQuestion: function(){
+       
         game.counter = 30;
         $("#counter").html(game.counter);
         game.currentQuestion++
@@ -125,7 +126,7 @@ var game = {
         clearInterval(timer);
         game.correct++;
         $("#subwrapper").html('<h2> YOU GOT IT !</h2>');
-        $("#image-view").append(winImage);
+        $("#image-view").html(winImage);
         if (game.currentQuestion==questions.length-1){
             setTimeout(game.results, 3*1000);
         }else{
@@ -140,7 +141,7 @@ var game = {
         clearInterval(timer);
         game.incorrect++;
         $("#subwrapper").html('<h2> YOU MISSED IT !</h2>');
-        $("#image-view").append(lossImage);
+        $("#image-view").html(lossImage);
         if (game.currentQuestion==questions.length-1){
             setTimeout(game.results, 3*1000);
         }else{
