@@ -16,32 +16,34 @@ $(document).on("click", "#reset", function(){
 
 var questions = [{question: "Which player has been an Atlanta Brave third baseman?",
                   choices: ["Lew Burdette","Bobby Mercer","Larry Jones","Russ Mills"],
-                correct: "Larry Jones",
-                image: "<img src='assets/images/celebrate.jpg'>"
+                correct: "Larry Jones"
+                
             },
             {question: "What year did the Braves win the World Series?",
                   choices: ["1995","2000","1991","1989"],
-                correct: "1995",
-                image: "<img src='assets/images/celebrate.jpg'>"
+                correct: "1995"
+                
             },
             {question: "Which city has the Braves never called home?",
                   choices: ["Boston","Atlanta","Milwaukee","Chicago"],
-                correct: "Chicago",
-                image: "<img src='assets/images/celebrate.jpg'>"
+                correct: "Chicago"
+                
             },
             {question: "What team did Dale Murphy go to after he played for the Atlanta Braves?",
                   choices: ["Chicago Cubs","Philadelphia Phillies","Cincinatti Reds","New York Mets"],
-                correct: "Philadelphia Phillies",
-                image: "<img src='assets/images/celebrate.jpg'>"
+                correct: "Philadelphia Phillies"
+                
             },
             {question: "Which one of these teams has Bobby Cox managed besides the Braves?",
                   choices: ["Mets","Blue Jays","Red Sox","White Sox"],
-                correct: "Blue jays",
-                image: "<img src='assets/images/celebrate.jpg'>"
+                correct: "Blue jays"
+                
             },
            
         ];
 
+var winImage = "<img src='assets/images/celebrate.jpg'>"
+var lossImage = "<img src='assets/images/celebrate.jpg'>"
 
 
 var game = {
@@ -82,6 +84,8 @@ var game = {
 
     },
 
+    
+
     timeUp: function(){
         clearInterval(timer);
         $("#subwrapper").html('<h2> AWW, OUT OF TIME!</h2>');
@@ -99,8 +103,8 @@ var game = {
     results: function(){
         clearInterval(timer);
         $("#subwrapper").html("<h3>Correct: " +game.correct+"</h3");
-        $("#subwrapper").append("<h3>Correct: " +game.incorrect+"</h3");
-        $("#subwrapper").append("<h3>Correct: " +game.unAnswered+"</h3");
+        $("#subwrapper").append("<h3>Incorrect: " +game.incorrect+"</h3");
+        $("#subwrapper").append("<h3>Unanswered: " +game.unAnswered+"</h3");
         $("#subwrapper").append("<button id = 'reset'>RESET</button>");
     },
 
@@ -121,6 +125,7 @@ var game = {
         clearInterval(timer);
         game.correct++;
         $("#subwrapper").html('<h2> YOU GOT IT !</h2>');
+        $("#image-view").append(winImage);
         if (game.currentQuestion==questions.length-1){
             setTimeout(game.results, 3*1000);
         }else{
@@ -135,6 +140,7 @@ var game = {
         clearInterval(timer);
         game.incorrect++;
         $("#subwrapper").html('<h2> YOU MISSED IT !</h2>');
+        $("#image-view").append(lossImage);
         if (game.currentQuestion==questions.length-1){
             setTimeout(game.results, 3*1000);
         }else{
