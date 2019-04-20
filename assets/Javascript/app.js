@@ -18,36 +18,36 @@ var questions = [{
     question: "What did Will and Ashley trade her violin for at the pawn shop?",
     choices: ["Drums", "Bass Guitar", "Gold Necklace", "Gun"],
     correct: "Drums",
-    winImage: "assets/images/drumsWin.gif",
-    lossImage: "<img src='assets/images/braves-lose.jpg'>"
+    winImage: "<img src='assets/images/drumsWin.gif'>",
+    lossImage: "<img src='assets/images/drumswrong.gif'>"
 },
 {
-    question: "What year did the Braves win the World Series?",
-    choices: ["1995", "2000", "1991", "1989"],
-    correct: "1995",
-    winImage: "<img src='assets/images/celebrate.jpg'>",
-    lossImage: "<img src='assets/images/braves-lose.jpg'>"
+    question: "How many kids did Uncle Phil have by the end of the series?",
+    choices: ["Four", "Three", "Five", "Two"],
+    correct: "Four",
+    winImage: "<img src='assets/images/phillright.gif'>",
+    lossImage: "<img src='assets/images/philwrong.gif'>"
 },
 {
     question: "In the episode 'The Mother of all Battles,' Ashley has a bully at school. What's the bully's name?",
     choices: ["Rachelle", "Isabelle", "Ingrid", "Paula"],
     correct: "Paula",
-    winImage: "<img src='assets/images/celebrate.jpg'>",
-    lossImage: "<img src='assets/images/braves-lose.jpg'>"
+    winImage: "<img src='assets/images/paularight.gif'>",
+    lossImage: "<img src='assets/images/paulawrong.gif'>"
 },
 {
     question: "In the very first episode, 'The Fresh Prince Project', who does Will confuse Geoffrey with?",
     choices: ["Carlton", "Uncle Phil", "Nicky", "Aunt Viv"],
     correct: "Uncle Phil",
-    winImage: "<img src='assets/images/celebrate.jpg'>",
-    lossImage: "<img src='assets/images/braves-lose.jpg'>"
+    winImage: "<img src='assets/images/geoffreyright.gif'>",
+    lossImage: "<img src='assets/images/geoffreywrong.gif'>"
 },
 {
     question: "Which famous DJ plays Will's best friend Jazz?",
     choices: ["Jeff Townes", "Dj Khaled", "John Digweed", "Bassnectar"],
-    correct: "Jeff Towes",
-    winImage: "<img src='assets/images/celebrate.jpg'>",
-    lossImage: "<img src='assets/images/braves-lose.jpg'>"
+    correct: "Jeff Townes",
+    winImage: "<img src='assets/images/jazzright.gif'>",
+    lossImage: "<img src='assets/images/jazzright.gif'>"
 },
 
 ];
@@ -58,7 +58,7 @@ var questions = [{
 var game = {
     questions: questions,
     currentQuestion: 0,
-    counter: 30,
+    counter: 15,
     correct: 0,
     incorrect: 0,
     unAnswered: 0,
@@ -67,7 +67,7 @@ var game = {
         game.counter--;
         $("#counter").html(game.counter);
         if (game.counter <= 0) {
-            alert("OUT OF TIME!");
+            $("#subwrapper").html('<h2> AWW, OUT OF TIME!</h2>');
             game.timeUp();
         }
 
@@ -76,36 +76,39 @@ var game = {
 
     loadQuestion: function () {
         timer = setInterval(game.countdown, 1000);
-        $("#subwrapper").html("<h2>TIME REMAINING  <span id = 'counter'> 30 </span>Seconds</h2>");
+        $("#subwrapper").html("<h2>TIME REMAINING:  <span id = 'counter'> 15 </span> Seconds</h2>");
         $("#subwrapper").append("<h2>" + questions[game.currentQuestion].question + "</h2>");
         for (i = 0; i < questions[game.currentQuestion].choices.length; i++) {
             $("#subwrapper").append('<button class = "answer-button" id = "button- ' + i +
                 '"data-name = "' + questions[game.currentQuestion].choices[i] + '">' + questions[game.currentQuestion].choices[i] + '</button>');
         }
-        
+
     },
 
     nextQuestion: function () {
 
-        game.counter = 30;
+        game.counter = 15;
         $("#counter").html(game.counter);
         game.currentQuestion++
         game.loadQuestion();
+        $("#image-view").empty();
 
     },
 
 
 
     timeUp: function () {
+        var timeImg = "<img src='assets/images/timeup.gif'>"
         clearInterval(timer);
+        game.unAnswered++
         $("#subwrapper").html('<h2> AWW, OUT OF TIME!</h2>');
         $("#subwrapper").append("<h3>The Correct Answer was : " +
             questions[game.currentQuestion].correct + "</h3>")
-
+        $("#image-view").html(timeImg);
         if (game.currentQuestion == questions.length - 1) {
             setTimeout(game.results(3 * 1000));
         } else {
-            setTimeout(game.nextQuestion(3 * 1000));
+            setTimeout(game.nextQuestion, 3 * 1000);
         }
 
     },
@@ -116,6 +119,12 @@ var game = {
         $("#subwrapper").append("<h3>Incorrect: " + game.incorrect + "</h3");
         $("#subwrapper").append("<h3>Unanswered: " + game.unAnswered + "</h3");
         $("#subwrapper").append("<button id = 'reset'>RESET</button>");
+
+        if (game.correct > game.incorrect) {
+            $("#image-view").html("<img src='assets/images/winner.gif'>");
+        } else if (game.incorrect > game.correct) {
+            $("#image-view").html("<img src='assets/images/loser.gif'>");
+        }
     },
 
     clicked: function (e) {
@@ -128,14 +137,12 @@ var game = {
 
     },
 
-
-
     answeredCorrectly: function () {
         console.log("YOU GOT IT");
         clearInterval(timer);
         game.correct++;
         $("#subwrapper").html('<h2> YOU GOT IT !</h2>');
-        $("#image-view").html(questions[game.currentQuestion].question.winImage);
+        $("#image-view").html(questions[game.currentQuestion].winImage);
         if (game.currentQuestion == questions.length - 1) {
             setTimeout(game.results, 3 * 1000);
         } else {
@@ -150,7 +157,7 @@ var game = {
         clearInterval(timer);
         game.incorrect++;
         $("#subwrapper").html('<h2> YOU MISSED IT !</h2>');
-        $("#image-view").append(questions[game.currentQuestion].question.lossImage);
+        $("#image-view").append(questions[game.currentQuestion].lossImage);
         if (game.currentQuestion == questions.length - 1) {
             setTimeout(game.results, 3 * 1000);
         } else {
@@ -159,13 +166,14 @@ var game = {
     },
 
     reset: function () {
-        questions = questions;
-        currentQuestion = 0;
-        counter = 30;
-        correct = 0;
-        incorrect = 0;
-        unAnswered = 0;
+        game.questions = questions;
+        game.currentQuestion = 0;
+        game.counter = 15;
+        game.correct = 0;
+        game.incorrect = 0;
+        game.unAnswered = 0;
         game.loadQuestion();
+
 
     }
 }
