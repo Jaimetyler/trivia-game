@@ -1,11 +1,36 @@
 body {
-    background-image: url("../images/freshprince.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
-    color: white;
+    background-image: url("../images/fresh-prince-font-5.png");
+    background-repeat: no-repeat; 
+    color: rgb(41, 39, 41);
+    /* background-size: cover; */
+    font-family: 'Calligraffitti', cursive;
+    font-weight: bold;
+}
+
+.row {
+    margin-top: 12%;
+    margin-bottom: 5%;
+    width: 50%;
 }
 
 #wrapper {
-    background-color: rgb(126, 115, 115, .65);
+    /* background-color: rgb(126, 115, 115, .15); */
+    margin-bottom: 5%;
+    text-align: center;
+    width: 60%;
+    float: right;
 }
 
+#img-view {
+    padding: 10px;
+}
+
+.answer-button {
+    margin: 10px;
+    margin-bottom: 20px;
+}
+
+#start-button {
+    background-color: rgb(221, 80, 221);
+    padding: 5px;
+}
