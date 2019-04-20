@@ -18,36 +18,36 @@ var questions = [{
     question: "What did Will and Ashley trade her violin for at the pawn shop?",
     choices: ["Drums", "Bass Guitar", "Gold Necklace", "Gun"],
     correct: "Drums",
-    winImage: "<img src='assets/images/drumsWin.gif'>",
-    lossImage: "<img src='assets/images/drumswrong.gif'>"
+    winImage: "<img src='assets/images/drumsWin.gif' style= 'width: 300px; height: 300px;'>",
+    lossImage: "<img src='assets/images/drumswrong.gif' style= 'width: 300px; height: 300px;''>"
 },
 {
     question: "How many kids did Uncle Phil have by the end of the series?",
     choices: ["Four", "Three", "Five", "Two"],
     correct: "Four",
-    winImage: "<img src='assets/images/phillright.gif'>",
-    lossImage: "<img src='assets/images/philwrong.gif'>"
+    winImage: "<img src='assets/images/phillright.gif' style= 'width: 300px; height: 300px;'>",
+    lossImage: "<img src='assets/images/philwrong.gif' style= 'width: 300px; height: 300px;'>"
 },
 {
     question: "In the episode 'The Mother of all Battles,' Ashley has a bully at school. What's the bully's name?",
     choices: ["Rachelle", "Isabelle", "Ingrid", "Paula"],
     correct: "Paula",
-    winImage: "<img src='assets/images/paularight.gif'>",
-    lossImage: "<img src='assets/images/paulawrong.gif'>"
+    winImage: "<img src='assets/images/paularight.gif' style= 'width: 300px; height: 300px;'>",
+    lossImage: "<img src='assets/images/paulawrong.gif' style= 'width: 300px; height: 300px;'>"
 },
 {
     question: "In the very first episode, 'The Fresh Prince Project', who does Will confuse Geoffrey with?",
     choices: ["Carlton", "Uncle Phil", "Nicky", "Aunt Viv"],
     correct: "Uncle Phil",
-    winImage: "<img src='assets/images/geoffreyright.gif'>",
-    lossImage: "<img src='assets/images/geoffreywrong.gif'>"
+    winImage: "<img src='assets/images/geoffreyright.gif' style= 'width: 300px; height: 300px;'>",
+    lossImage: "<img src='assets/images/geoffreywrong.gif' style= 'width: 300px; height: 300px;'>"
 },
 {
     question: "Which famous DJ plays Will's best friend Jazz?",
     choices: ["Jeff Townes", "Dj Khaled", "John Digweed", "Bassnectar"],
     correct: "Jeff Townes",
-    winImage: "<img src='assets/images/jazzright.gif'>",
-    lossImage: "<img src='assets/images/jazzright.gif'>"
+    winImage: "<img src='assets/images/jazzright.gif' style= 'width: 300px; height: 300px;'>",
+    lossImage: "<img src='assets/images/jazzright.gif' style= 'width: 300px; height: 300px;'>"
 },
 
 ];
@@ -76,7 +76,7 @@ var game = {
 
     loadQuestion: function () {
         timer = setInterval(game.countdown, 1000);
-        $("#subwrapper").html("<h2>TIME REMAINING:  <span id = 'counter'> 15 </span> Seconds</h2>");
+        $("#subwrapper").html("<h2>TIME:  <span id = 'counter' style= 'color: red'> 15 </span> Seconds</h2>");
         $("#subwrapper").append("<h2>" + questions[game.currentQuestion].question + "</h2>");
         for (i = 0; i < questions[game.currentQuestion].choices.length; i++) {
             $("#subwrapper").append('<button class = "answer-button" id = "button- ' + i +
@@ -98,7 +98,7 @@ var game = {
 
 
     timeUp: function () {
-        var timeImg = "<img src='assets/images/timeup.gif'>"
+        var timeImg = "<img src='assets/images/timeup.gif' style='width: 300px; height: 300px;'>"
         clearInterval(timer);
         game.unAnswered++
         $("#subwrapper").html('<h2> AWW, OUT OF TIME!</h2>');
@@ -173,7 +173,7 @@ var game = {
         game.incorrect = 0;
         game.unAnswered = 0;
         game.loadQuestion();
-
+        $("#image-view").empty();
 
     }
 }
