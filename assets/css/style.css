@@ -1,41 +1,14 @@
-.jumbotron {
-    text-align: center;
+body {
+    background-image: url("../images/freshprince.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: white;
 }
 
-h1 {
-    padding-bottom: 50px;
+#wrapper {
+    background-color: rgb(126, 115, 115, .65);
 }
 
-
-
-.card-header {
-    text-align: center;
-    font-weight: bold;
-    font-size: 22px;
-}
-
-.row {
-    font-size: 28px;
-    margin-top: 15px;
-}
-
-.row, #start {
-    text-align: center;
-    margin-top: 15px;
-}
-
-#questions {
-    font-weight: bold;
-}
-
-
-
-.choices {
-    font-weight : normal;
-
-}
-
-.choices:hover  {
-    background-color : rgb(44, 40, 240);
-    
+#image-view {
+    background-color: rgb(126, 115, 115, .65);
 }
