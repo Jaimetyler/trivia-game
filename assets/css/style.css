@@ -3,8 +3,11 @@ body {
     background-repeat: no-repeat; 
     color: rgb(41, 39, 41);
     /* background-size: cover; */
-    font-family: 'Calligraffitti', cursive;
-    font-weight: bold;
+    font-family: 'Bad Script', cursive;
+    font-family: 'Changa', sans-serif;
+    font-family: 'Srisakdi', cursive;
+    font-family: 'Oswald', sans-serif;
+    
 }
 
 .row {
