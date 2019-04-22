@@ -1,14 +1,24 @@
 body {
-    background-image: url("../images/fresh-prince-font-5.png");
+    /* background-image: url("../images/fresh-prince-font-5.png");
     background-repeat: no-repeat; 
-    color: rgb(41, 39, 41);
+    color: rgb(41, 39, 41); */
     /* background-size: cover; */
     font-family: 'Bad Script', cursive;
     font-family: 'Changa', sans-serif;
     font-family: 'Srisakdi', cursive;
     font-family: 'Oswald', sans-serif;
-    
+    margin-right:10%;
+    margin-left: 10%;
+    background-color: rgb(255, 255, 255);
+    border-width: 4px;
+    border-style: solid;
+    border-color: rgb(253, 21, 253);
 }
+
+#main-content {
+    text-align: center;
+}
+
 
 .row {
     margin-top: 12%;
@@ -20,20 +30,32 @@ body {
     /* background-color: rgb(126, 115, 115, .15); */
     margin-bottom: 5%;
     text-align: center;
-    width: 60%;
-    float: right;
+    width: 100%;
+    
 }
 
-#img-view {
-    padding: 10px;
-}
 
-.answer-button {
+
+.answer-button,#start-button {
     margin: 10px;
     margin-bottom: 20px;
+    background-color: rgb(253, 21, 253);
+    padding: 10px;
+    border-radius: 20px;
+    font-size: 24px;
 }
 
-#start-button {
-    background-color: rgb(221, 80, 221);
-    padding: 5px;
-}
+
+
+/* MEDIA QUERIES*/
+
+@media only screen and (max-width: 812px) {
+    #wrapper {
+        padding: 2%;
+        /* background-color: rgb(126, 115, 115, .15); */
+        margin-bottom: 5%;
+        text-align: center;
+        width: 100%;
+         
+    }
+  }
