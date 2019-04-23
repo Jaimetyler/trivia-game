@@ -47,7 +47,7 @@ var questions = [{
     choices: ["Jeff Townes", "Dj Khaled", "John Digweed", "Bassnectar"],
     correct: "Jeff Townes",
     winImage: "<img src='assets/images/jazzright.gif' style= 'width: 300px; height: 300px;'>",
-    lossImage: "<img src='assets/images/jazzright.gif' style= 'width: 300px; height: 300px;'>"
+    lossImage: "<img src='assets/images/jazzright.gif' style= 'width: 300px; height: 250px;'>"
 },
 
 ];
@@ -70,7 +70,7 @@ var game = {
             $("#subwrapper").html('<h2> AWW, OUT OF TIME!</h2>');
             game.timeUp();
         }
-
+        
 
     },
 
@@ -121,9 +121,20 @@ var game = {
         $("#subwrapper").append("<button id = 'reset'>RESET</button>");
 
         if (game.correct > game.incorrect) {
+            $("#subwrapper").append('<h2> Hey, you know your stuff !</h2>');
             $("#image-view").html("<img src='assets/images/winner.gif'>");
-        } else if (game.incorrect > game.correct) {
+        }  if (game.incorrect > game.correct) {
+            $("#subwrapper").append('<h2> Better luck next time!</h2>');
             $("#image-view").html("<img src='assets/images/loser.gif'>");
+        }   if (game.incorrect + game.unAnswered > game.correct) {
+            $("#subwrapper").append('<h2> Better luck next time!</h2>');
+            $("#image-view").html("<img src='assets/images/loser.gif'>");
+        } if ( game.unAnswered === questions.length) {
+            $("#subwrapper").append('<h2> Uhhh, This is embarrasing!</h2>');
+            $("#image-view").html("<img src='assets/images/loser.gif'>");
+        } if (game.correct === questions.length) {
+            $("#subwrapper").append('<h2> You have made Uncle Phil Proud !</h2>');
+            $("#image-view").html("<img src='assets/images/winner.gif'>");
         }
     },
 
@@ -157,6 +168,8 @@ var game = {
         clearInterval(timer);
         game.incorrect++;
         $("#subwrapper").html('<h2> YOU MISSED IT !</h2>');
+        $("#subwrapper").append("<h3>The Correct Answer was : " +
+            questions[game.currentQuestion].correct + "</h3>")
         $("#image-view").append(questions[game.currentQuestion].lossImage);
         if (game.currentQuestion == questions.length - 1) {
             setTimeout(game.results, 3 * 1000);
